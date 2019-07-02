@@ -378,7 +378,7 @@ Public Class Principal
         FlNm = "Exportados\" & FlNm2 & "--" & Now.Year & "-" & Now.Month & "-" & Now.Day & "--" & Now.Hour & "-" & Now.Minute & "-" & Now.Second & ".xls"
         If File.Exists(FlNm) Then File.Delete(FlNm)
         'MsgBox("stop", MsgBoxStyle.Information, "leyendo")
-        MExportar.ExportToExcel(DGV, FlNm, 1)
+        MExportar.ExportToExcel(DGV, FlNm)
 
         'generando el archivo de texto que contendra las lecturas faltantes
         Report = "Exportados\Reporte" & FlNm2 & "--" & Now.Year & "-" & Now.Month & "-" & Now.Day & "--" & Now.Hour & "-" & Now.Minute & "-" & Now.Second & ".txt"
@@ -513,7 +513,7 @@ Public Class Principal
                 FlNm2 = name
                 FlNm = "Exportados\" & FlNm2 & "--" & Now.Year & "-" & Now.Month & "-" & Now.Day & "--" & Now.Hour & "-" & Now.Minute & "-" & Now.Second & ".xls"
                 If File.Exists(FlNm) Then File.Delete(FlNm)
-                MExportar.ExportToExcel(DGVTotal, FlNm, exportar)
+                MExportar.ExportToExcelMasivo(FlNm)
 
                 'generando el archivo de texto que contendra las lecturas faltantes
                 Report = "Exportados\Reporte" & FlNm2 & "--" & Now.Year & "-" & Now.Month & "-" & Now.Day & "--" & Now.Hour & "-" & Now.Minute & "-" & Now.Second & ".txt"
@@ -527,7 +527,7 @@ Public Class Principal
 
                 'Aqui comienza el procesamiento de los datos
                 Dim contadorReg As Integer = 1
-                Dim newHojaExcel As Integer = 340 'division de hojas en la exportacion al archivo de excel
+                Dim newHojaExcel As Integer = 22 'division de hojas en la exportacion al archivo de excel
                 Dim divReg As Integer = 1
                 Dim id_medidor As String
 
@@ -537,7 +537,7 @@ Public Class Principal
                     'MsgBox(Tacna,, "tacna")
                     Dim arregloTacna() As String = Tacna.Split(";")
 
-                    MExportar.AddExcelHeader(DGVTotal, "Tacna", FlNm)
+                    MExportar.AddExcelHeader("Tacna", FlNm)
 
                     For intRow As Integer = 0 To arregloTacna.Length - 1
                         id_medidor = CInt(Val(arregloTacna(intRow)))
@@ -563,30 +563,20 @@ Public Class Principal
 
                         contadorReg = contadorReg + 1
                         If contadorReg = newHojaExcel Then
-                            Dim fsTa As New StreamWriter(FlNm, True)
-                            With fsTa
-                                .WriteLine("        </Table>")
-                                .WriteLine("    </Worksheet>")
-                                .Close()
-                            End With
+                            MExportar.AddExcelFooter(FlNm)
                             divReg = divReg + 1
-                            MExportar.AddExcelHeader(DGVTotal, "Tacna" & divReg, FlNm)
+                            MExportar.AddExcelHeader("Tacna" & divReg, FlNm)
                             contadorReg = 0
                         End If
                     Next
-                    Dim fsT As New StreamWriter(FlNm, True)
-                    With fsT
-                        .WriteLine("        </Table>")
-                        .WriteLine("    </Worksheet>")
-                        .Close()
-                    End With
+                    MExportar.AddExcelFooter(FlNm)
                 End If
 
                 If (Moquegua IsNot "" And chkMoquegua.Checked = True) Then
                     Moquegua = Moquegua.Remove(Moquegua.Length - 1)
                     Dim arregloMoquegua() As String = Moquegua.Split(";")
 
-                    MExportar.AddExcelHeader(DGVTotal, "Moquegua", FlNm)
+                    MExportar.AddExcelHeader("Moquegua", FlNm)
 
                     For intRow As Integer = 0 To arregloMoquegua.Length - 1
 
@@ -615,23 +605,13 @@ Public Class Principal
 
                         contadorReg = contadorReg + 1
                         If contadorReg = newHojaExcel Then
-                            Dim fsTa As New StreamWriter(FlNm, True)
-                            With fsTa
-                                .WriteLine("        </Table>")
-                                .WriteLine("    </Worksheet>")
-                                .Close()
-                            End With
+                            MExportar.AddExcelFooter(FlNm)
                             divReg = divReg + 1
-                            MExportar.AddExcelHeader(DGVTotal, "Moquegua" & divReg, FlNm)
+                            MExportar.AddExcelHeader("Moquegua" & divReg, FlNm)
                             contadorReg = 0
                         End If
                     Next
-                    Dim fsM As New StreamWriter(FlNm, True)
-                    With fsM
-                        .WriteLine("        </Table>")
-                        .WriteLine("    </Worksheet>")
-                        .Close()
-                    End With
+                    MExportar.AddExcelFooter(FlNm)
                 End If
 
                 If (Ilo IsNot "" And chkIlo.Checked = True) Then
@@ -639,7 +619,7 @@ Public Class Principal
                     'MsgBox(Ilo,, "ilo")
                     Dim arregloIlo() As String = Ilo.Split(";")
                     'MsgBox(Ilo,, "ilo")
-                    MExportar.AddExcelHeader(DGVTotal, "Ilo", FlNm)
+                    MExportar.AddExcelHeader("Ilo", FlNm)
 
                     For intRow As Integer = 0 To arregloIlo.Length - 1
 
@@ -668,23 +648,13 @@ Public Class Principal
 
                         contadorReg = contadorReg + 1
                         If contadorReg = newHojaExcel Then
-                            Dim fsTa As New StreamWriter(FlNm, True)
-                            With fsTa
-                                .WriteLine("        </Table>")
-                                .WriteLine("    </Worksheet>")
-                                .Close()
-                            End With
+                            MExportar.AddExcelFooter(FlNm)
                             divReg = divReg + 1
-                            MExportar.AddExcelHeader(DGVTotal, "Ilo" & divReg, FlNm)
+                            MExportar.AddExcelHeader("Ilo" & divReg, FlNm)
                             contadorReg = 0
                         End If
                     Next
-                    Dim fsI As New StreamWriter(FlNm, True)
-                    With fsI
-                        .WriteLine("        </Table>")
-                        .WriteLine("    </Worksheet>")
-                        .Close()
-                    End With
+                    MExportar.AddExcelFooter(FlNm)
                 End If
 
                 If (Libres IsNot "" And chkLibres.Checked = True) Then
@@ -692,7 +662,7 @@ Public Class Principal
                     'MsgBox(Tacna,, "tacna")
                     Dim arregloLibres() As String = Tacna.Split(";")
 
-                    MExportar.AddExcelHeader(DGVTotal, "Libres", FlNm)
+                    MExportar.AddExcelHeader("Libres", FlNm)
 
                     For intRow As Integer = 0 To arregloLibres.Length - 1
                         id_medidor = CInt(Val(arregloLibres(intRow)))
@@ -718,23 +688,13 @@ Public Class Principal
 
                         contadorReg = contadorReg + 1
                         If contadorReg = newHojaExcel Then
-                            Dim fsTa As New StreamWriter(FlNm, True)
-                            With fsTa
-                                .WriteLine("        </Table>")
-                                .WriteLine("    </Worksheet>")
-                                .Close()
-                            End With
+                            MExportar.AddExcelFooter(FlNm)
                             divReg = divReg + 1
-                            MExportar.AddExcelHeader(DGVTotal, "Libres" & divReg, FlNm)
+                            MExportar.AddExcelHeader("Libres" & divReg, FlNm)
                             contadorReg = 0
                         End If
                     Next
-                    Dim fsT As New StreamWriter(FlNm, True)
-                    With fsT
-                        .WriteLine("        </Table>")
-                        .WriteLine("    </Worksheet>")
-                        .Close()
-                    End With
+                    MExportar.AddExcelFooter(FlNm)
                 End If
 
                 Dim fs2 As New StreamWriter(FlNm, True)
