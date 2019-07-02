@@ -1,6 +1,6 @@
 ﻿Imports System.Data.SQLite
 Module MBaseDatos
-    Const cadena_conexion As String = "Data Source=electrosur.s3db;Version=3"
+    Const cadena_conexion As String = "Data Source=electrosur.db;Version=3"
     Public Sub ConsultaNumImport(ByVal NombreSector As String, ByRef NumImport As String)
         Dim objCon As SQLiteConnection
         Dim objCommand As SQLiteCommand
@@ -47,5 +47,45 @@ Module MBaseDatos
             objCommand1.Dispose()
             objCon1.Close()
         End Try
+    End Sub
+    Public Sub MostrarPadron(ByVal NombrePadron As String, ByRef dgvmedidor As DataGridView)
+        Dim sql As String = ""
+
+        If NombrePadron = "TODOS" Then
+            sql = "SELECT * FROM Padroncliente WHERE NumImport in (select  Max(NumImport) from Padroncliente)"
+        Else
+            sql = "SELECT * FROM Padroncliente WHERE NumImport in (select  Max(NumImport) from Padroncliente where NombrePadron=""" & NombrePadron & """)"
+        End If
+        MsgBox(sql)
+        Using con As New SQLiteConnection(cadena_conexion)
+
+            Dim command As New SQLiteCommand(sql, con)
+            Dim da As New SQLiteDataAdapter
+            da.SelectCommand = command
+            Dim dt As New DataTable
+            da.Fill(dt)
+            dgvmedidor.DataSource = dt
+
+            With dgvmedidor
+                .Columns(0).HeaderText = "Número de Padrón Actual"
+                .Columns(2).HeaderText = "Nombre de Padrón"
+                .Columns(3).HeaderText = "Item"
+                .Columns(3).HeaderText = "Codigo Ruta de Suministro"
+                .Columns(4).HeaderText = "Codigo de Suministro"
+                .Columns(5).HeaderText = "Nombre de Suministro"
+                .Columns(6).HeaderText = "Direccion del Predio"
+                .Columns(7).HeaderText = "Nombre del Sector"
+                .Columns(8).HeaderText = "Valor de Tension"
+                .Columns(9).HeaderText = "Tarifa"
+                .Columns(10).HeaderText = "Sistema Electrico"
+                .Columns(11).HeaderText = "Actividad Economica"
+                .Columns(12).HeaderText = "Factor de Tension"
+                .Columns(13).HeaderText = "Factor de Corriente"
+                .Columns(14).HeaderText = "Factor de Transformacion EA"
+                .Columns(15).HeaderText = "Marca del Medidor"
+                .Columns(16).HeaderText = "Nombre del Modelo"
+                .Columns(17).HeaderText = "Serie"
+            End With
+        End Using
     End Sub
 End Module

@@ -90,7 +90,7 @@ Public Class Padron_Clientes
                     'MsgBox(dgvmedidor.Rows(i).Cells(0).Value.ToString())
                     If String.IsNullOrEmpty(.Rows(i).Cells(0).Value.ToString()) = False Then
                         'MsgBox(.Rows(i).Cells(1).Value.ToString(), MsgBoxStyle.Information, "Proceso de Cargar Terminado")
-                        MBaseDatos.GuardarPadron(NumImport, cboExcel.SelectedItem, item, .Rows(i).Cells(1).Value.ToString(), .Rows(i).Cells(2).Value.ToString(), .Rows(i).Cells(3).Value.ToString(), .Rows(i).Cells(4).Value.ToString(), .Rows(i).Cells(5).Value.ToString(), .Rows(i).Cells(6).Value.ToString(), .Rows(i).Cells(7).Value.ToString(), .Rows(i).Cells(8).Value.ToString(), .Rows(i).Cells(9).Value.ToString(), .Rows(i).Cells(10).Value.ToString(), .Rows(i).Cells(11).Value.ToString(), .Rows(i).Cells(12).Value.ToString(), .Rows(i).Cells(13).Value.ToString(), .Rows(i).Cells(14).Value.ToString(), .Rows(i).Cells(15).Value.ToString())
+                        MBaseDatos.GuardarPadron(NumImport, cboExcel.SelectedItem.ToUpper(), item, .Rows(i).Cells(1).Value.ToString(), .Rows(i).Cells(2).Value.ToString(), .Rows(i).Cells(3).Value.ToString(), .Rows(i).Cells(4).Value.ToString(), .Rows(i).Cells(5).Value.ToString(), .Rows(i).Cells(6).Value.ToString(), .Rows(i).Cells(7).Value.ToString(), .Rows(i).Cells(8).Value.ToString(), .Rows(i).Cells(9).Value.ToString(), .Rows(i).Cells(10).Value.ToString(), .Rows(i).Cells(11).Value.ToString(), .Rows(i).Cells(12).Value.ToString(), .Rows(i).Cells(13).Value.ToString(), .Rows(i).Cells(14).Value.ToString(), .Rows(i).Cells(15).Value.ToString())
                     End If
                     ProgressBar1.Value = i + 1
                     item = item + 1
@@ -101,5 +101,25 @@ Public Class Padron_Clientes
         ProgressBar1.Value = 0
         Me.Close()
 
+    End Sub
+
+    Private Sub btnMostrarPadron_Click(sender As Object, e As EventArgs) Handles btnMostrarPadron.Click
+        btnProcesar.Enabled = False
+        dgvmedidor.DataMember = ""
+        dgvmedidor.DataSource = ""
+
+        Dim tipo_cbo As Integer
+        Dim NombreSector As String = ""
+        tipo_cbo = cboSector.SelectedIndex
+        Select Case tipo_cbo
+            Case 0 : NombreSector = "Tacna"
+            Case 1 : NombreSector = "Moquegua"
+            Case 2 : NombreSector = "Ilo"
+            Case 3 : NombreSector = "Libres"
+            Case 4 : NombreSector = "Todos"
+        End Select
+
+        MBaseDatos.MostrarPadron(NombreSector.ToUpper(), dgvmedidor)
+        dgvmedidor.AllowUserToAddRows = False ' denegar la acción de registros al usuario
     End Sub
 End Class
