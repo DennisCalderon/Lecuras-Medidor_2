@@ -170,7 +170,7 @@ Public Class Principal
         If exportar = 1 Then
             lblregistros.Text = conteo
             ProgressBar1.Minimum = 0
-            ProgressBar1.Maximum = fila + 10
+            ProgressBar1.Maximum = fila
         End If
 
         objReader.Close()
@@ -220,7 +220,7 @@ Public Class Principal
                 ProgressBar1.Value = fila2
             End If
             If exportar = 2 Then
-                conteoTotal = conteoTotal
+                conteoTotal = conteoTotal + 1
                 ProgressBar1.Value = conteoTotal
             End If
         Loop Until sLine Is Nothing
@@ -527,7 +527,7 @@ Public Class Principal
 
                 'Aqui comienza el procesamiento de los datos
                 Dim contadorReg As Integer = 1
-                Dim newHojaExcel As Integer = 20 '340 'division de hojas en la exportacion al archivo de excel
+                Dim newHojaExcel As Integer = 340 'division de hojas en la exportacion al archivo de excel
                 Dim divReg As Integer = 1
                 Dim id_medidor As String
 
@@ -573,25 +573,8 @@ Public Class Principal
                         If contadorReg = newHojaExcel Then
                             Dim fsTa As New StreamWriter(FlNm, True)
                             With fsTa
-                                .WriteLine(" </Table>")
-                                .WriteLine(" <WorksheetOptions xmlns=""urn:schemas-microsoft-com:office:excel"">")
-                                .WriteLine("  <PageSetup>")
-                                .WriteLine("   <Header x:Margin=""0.3""/>")
-                                .WriteLine("   <Footer x:Margin=""0.3""/>")
-                                .WriteLine("   <PageMargins x:Bottom=""0.75"" x:Left=""0.7"" x:Right=""0.7"" x:Top=""0.75""/>")
-                                .WriteLine("  </PageSetup>")
-                                .WriteLine("  <Unsynced/>")
-                                .WriteLine("  <Selected/>")
-                                .WriteLine("  <Panes>")
-                                .WriteLine("   <Pane>")
-                                .WriteLine("    <Number>3</Number>")
-                                .WriteLine("    <RangeSelection>R1C1:R4C6</RangeSelection>")
-                                .WriteLine("   </Pane>")
-                                .WriteLine("  </Panes>")
-                                .WriteLine("  <ProtectObjects>False</ProtectObjects>")
-                                .WriteLine("  <ProtectScenarios>False</ProtectScenarios>")
-                                .WriteLine(" </WorksheetOptions>")
-                                .WriteLine("</Worksheet>")
+                                .WriteLine("        </Table>")
+                                .WriteLine("    </Worksheet>")
                                 .Close()
                             End With
                             divReg = divReg + 1
@@ -601,25 +584,8 @@ Public Class Principal
                     Next
                     Dim fsT As New StreamWriter(FlNm, True)
                     With fsT
-                        .WriteLine(" </Table>")
-                        .WriteLine(" <WorksheetOptions xmlns=""urn:schemas-microsoft-com:office:excel"">")
-                        .WriteLine("  <PageSetup>")
-                        .WriteLine("   <Header x:Margin=""0.3""/>")
-                        .WriteLine("   <Footer x:Margin=""0.3""/>")
-                        .WriteLine("   <PageMargins x:Bottom=""0.75"" x:Left=""0.7"" x:Right=""0.7"" x:Top=""0.75""/>")
-                        .WriteLine("  </PageSetup>")
-                        .WriteLine("  <Unsynced/>")
-                        .WriteLine("  <Selected/>")
-                        .WriteLine("  <Panes>")
-                        .WriteLine("   <Pane>")
-                        .WriteLine("    <Number>3</Number>")
-                        .WriteLine("    <RangeSelection>R1C1:R4C6</RangeSelection>")
-                        .WriteLine("   </Pane>")
-                        .WriteLine("  </Panes>")
-                        .WriteLine("  <ProtectObjects>False</ProtectObjects>")
-                        .WriteLine("  <ProtectScenarios>False</ProtectScenarios>")
-                        .WriteLine(" </WorksheetOptions>")
-                        .WriteLine("</Worksheet>")
+                        .WriteLine("        </Table>")
+                        .WriteLine("    </Worksheet>")
                         .Close()
                     End With
                 End If
@@ -826,22 +792,5 @@ Public Class Principal
                 btnNuevo.Select()
             End If
         End If
-    End Sub
-
-    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
-        btnBuscar.Enabled = True
-        checkedMedidor(True)
-        lblregistros.Text = "0"
-        lblarchivos.Text = "0"
-        btnNuevo.Enabled = False
-        btnExportUnit.Enabled = False
-        btnExportMasivo.Enabled = False
-        lbArchivos.Enabled = False
-        checkedPadron(False)
-
-        lbArchivos.Items.Clear()
-        dgvcontenido.Rows.Clear()
-
-        btnBuscar.Select()
     End Sub
 End Class

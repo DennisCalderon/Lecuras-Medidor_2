@@ -3,189 +3,70 @@ Module MExportar
     Public Sub ExportToExcel(ByVal DGV As DataGridView, ByVal FlNm As String, ByVal exportar As Integer)
         Dim fs As New StreamWriter(FlNm, False)
         With fs
-            .WriteLine("<?xml version=""1.0""?> ")
-            .WriteLine("<?mso-application progid=""Excel.Sheet""?>  ")
-            .WriteLine("<Workbook xmlns=""urn:schemas-microsoft-com:office:spreadsheet""  ")
-            .WriteLine(" xmlns:o=""urn:schemas-microsoft-com:office:office""")
-            .WriteLine(" xmlns:x=""urn:schemas-microsoft-com:office:excel"" ")
-            .WriteLine(" xmlns:ss=""urn:schemas-microsoft-com:office:spreadsheet""")
-            .WriteLine(" xmlns:html=""http://www.w3.org/TR/REC-html40""> ")
-            .WriteLine(" <DocumentProperties xmlns=""urn:schemas-microsoft-com:office:office""> ")
-            .WriteLine("  <Version>16.00</Version>")
-            .WriteLine(" </DocumentProperties>  ")
-            .WriteLine(" <OfficeDocumentSettings xmlns=""urn:schemas-microsoft-com:office:office"">  ")
-            .WriteLine("  <AllowPNG/>   ")
-            .WriteLine(" </OfficeDocumentSettings>")
-            .WriteLine(" <ExcelWorkbook xmlns=""urn:schemas-microsoft-com:office:excel""> ")
-            .WriteLine("  <WindowHeight>9630</WindowHeight>")
-            .WriteLine("  <WindowWidth>24000</WindowWidth> ")
-            .WriteLine("  <WindowTopX>0</WindowTopX>  ")
-            .WriteLine("  <WindowTopY>0</WindowTopY>  ")
-            .WriteLine("  <ProtectStructure>False</ProtectStructure>")
-            .WriteLine("  <ProtectWindows>False</ProtectWindows>")
-            .WriteLine(" </ExcelWorkbook>")
-            .WriteLine(" <Styles> ")
-            .WriteLine("  <Style ss:ID=""Default"" ss:Name=""Normal"">   ")
-            .WriteLine("   <Alignment ss:Vertical=""Bottom""/>")
-            .WriteLine("   <Borders/>   ")
-            .WriteLine("   <Font ss:FontName=""Calibri"" x:Family=""Swiss"" ss:Size=""11"" ss:Color=""#000000""/>  ")
-            .WriteLine("   <Interior/>  ")
-            .WriteLine("   <NumberFormat/>   ")
-            .WriteLine("   <Protection/>")
-            .WriteLine("  </Style>")
-            .WriteLine("  <Style ss:ID=""s62""> ")
-            .WriteLine("   <NumberFormat ss:Format=""0""/> ")
-            .WriteLine("  </Style>")
-            .WriteLine("  <Style ss:ID=""s63""> ")
-            .WriteLine("   <NumberFormat ss:Format=""0.0000""/>")
-            .WriteLine("  </Style>")
-            .WriteLine("  <Style ss:ID=""s64""> ")
-            .WriteLine("   <Alignment ss:Vertical=""Bottom""/>")
-            .WriteLine("   <Borders/>   ")
-            .WriteLine("   <Font ss:FontName=""Calibri""/> ")
-            .WriteLine("   <Interior/>  ")
-            .WriteLine("   <NumberFormat/>   ")
-            .WriteLine("   <Protection/>")
-            .WriteLine("  </Style>")
-            .WriteLine("  <Style ss:ID=""s68""> ")
-            .WriteLine("   <Alignment ss:Vertical=""Bottom""/>")
-            .WriteLine("   <Borders>")
-            .WriteLine("		<Border ss:Position=""Bottom"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
-            .WriteLine("		<Border ss:Position=""Left"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>  ")
-            .WriteLine("		<Border ss:Position=""Right"" ss:LineStyle=""Continuous"" ss:Weight=""1""/> ")
-            .WriteLine("		<Border ss:Position=""Top"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
-            .WriteLine("   </Borders>   ")
-            .WriteLine("   <Font ss:FontName=""Calibri""/> ")
-            .WriteLine("   <Interior/>  ")
-            .WriteLine("   <NumberFormat/>   ")
-            .WriteLine("   <Protection/>")
-            .WriteLine("  </Style>")
-            .WriteLine("  <Style ss:ID=""s69""> ")
-            .WriteLine("   <Alignment ss:Vertical=""Bottom""/>")
-            .WriteLine("   <Borders>")
-            .WriteLine("		<Border ss:Position=""Bottom"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
-            .WriteLine("		<Border ss:Position=""Left"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>  ")
-            .WriteLine("		<Border ss:Position=""Right"" ss:LineStyle=""Continuous"" ss:Weight=""1""/> ")
-            .WriteLine("		<Border ss:Position=""Top"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
-            .WriteLine("   </Borders>   ")
-            .WriteLine("   <Font ss:FontName=""Calibri""/> ")
-            .WriteLine("   <Interior/>  ")
-            .WriteLine("   <NumberFormat ss:Format=""0""/> ")
-            .WriteLine("   <Protection/>")
-            .WriteLine("  </Style>")
-            .WriteLine("  <Style ss:ID=""s70""> ")
-            .WriteLine("   <Alignment ss:Vertical=""Bottom""/>")
-            .WriteLine("   <Borders>")
-            .WriteLine("		<Border ss:Position=""Bottom"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
-            .WriteLine("		<Border ss:Position=""Left"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>  ")
-            .WriteLine("		<Border ss:Position=""Right"" ss:LineStyle=""Continuous"" ss:Weight=""1""/> ")
-            .WriteLine("		<Border ss:Position=""Top"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
-            .WriteLine("   </Borders>   ")
-            .WriteLine("   <Font ss:FontName=""Calibri""/> ")
-            .WriteLine("   <Interior/>  ")
-            .WriteLine("   <NumberFormat ss:Format=""0.0000""/>")
-            .WriteLine("   <Protection/>")
-            .WriteLine("  </Style>")
-            .WriteLine("  <Style ss:ID=""s71""> ")
-            .WriteLine("   <Alignment ss:Vertical=""Bottom""/>")
-            .WriteLine("   <Borders/>   ")
-            .WriteLine("   <Font ss:FontName=""Calibri""/> ")
-            .WriteLine("   <Interior/>  ")
-            .WriteLine("   <NumberFormat ss:Format=""0.0000;[Red]0.0000""/> ")
-            .WriteLine("   <Protection/>")
-            .WriteLine("  </Style>")
-            .WriteLine("  <Style ss:ID=""s78""> ")
-            .WriteLine("   <Alignment ss:Horizontal=""Center"" ss:Vertical=""Center"" ss:WrapText=""1""/>")
-            .WriteLine("   <Borders>")
-            .WriteLine("		<Border ss:Position=""Left"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>  ")
-            .WriteLine("		<Border ss:Position=""Right"" ss:LineStyle=""Continuous"" ss:Weight=""1""/> ")
-            .WriteLine("		<Border ss:Position=""Top"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
-            .WriteLine("   </Borders>   ")
-            .WriteLine("   <Font ss:FontName=""Calibri"" ss:Size=""11"" ss:Bold=""1""/>")
-            .WriteLine("   <Interior ss:Color=""#FFFF00"" ss:Pattern=""Solid""/>  ")
-            .WriteLine("   <NumberFormat/>   ")
-            .WriteLine("   <Protection/>")
-            .WriteLine("  </Style>")
-            .WriteLine("  <Style ss:ID=""s79""> ")
-            .WriteLine("   <Alignment ss:Horizontal=""Center"" ss:Vertical=""Center"" ss:WrapText=""1""/>")
-            .WriteLine("   <Borders>")
-            .WriteLine("		<Border ss:Position=""Left"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>  ")
-            .WriteLine("		<Border ss:Position=""Right"" ss:LineStyle=""Continuous"" ss:Weight=""1""/> ")
-            .WriteLine("		<Border ss:Position=""Top"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
-            .WriteLine("   </Borders>   ")
-            .WriteLine("   <Font ss:FontName=""Calibri"" ss:Size=""11"" ss:Bold=""1""/>")
-            .WriteLine("   <Interior ss:Color=""#FFFF00"" ss:Pattern=""Solid""/>  ")
-            .WriteLine("   <NumberFormat ss:Format=""0""/> ")
-            .WriteLine("   <Protection/>")
-            .WriteLine("  </Style>")
-            .WriteLine("  <Style ss:ID=""s80""> ")
-            .WriteLine("   <Alignment ss:Horizontal=""Center"" ss:Vertical=""Center"" ss:WrapText=""1""/>")
-            .WriteLine("   <Borders>")
-            .WriteLine("		<Border ss:Position=""Left"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>  ")
-            .WriteLine("		<Border ss:Position=""Right"" ss:LineStyle=""Continuous"" ss:Weight=""1""/> ")
-            .WriteLine("		<Border ss:Position=""Top"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
-            .WriteLine("   </Borders>   ")
-            .WriteLine("   <Font ss:FontName=""Calibri"" ss:Size=""11"" ss:Bold=""1""/>")
-            .WriteLine("   <Interior ss:Color=""#FFFF00"" ss:Pattern=""Solid""/>  ")
-            .WriteLine("   <NumberFormat ss:Format=""0.0000""/>")
-            .WriteLine("   <Protection/>")
-            .WriteLine("  </Style>")
-            .WriteLine(" </Styles>")
+            .WriteLine("<?xml version=""1.0""?>")
+            .WriteLine("<?mso-application progid=""Excel.Sheet""?>")
+            .WriteLine("<Workbook xmlns=""urn:schemas-microsoft-com:office:spreadsheet"">")
+            .WriteLine("    <Styles>")
+            .WriteLine("        <Style ss:ID=""hdr"">")
+            .WriteLine("            <Alignment ss:Horizontal=""Center""/>")
+            .WriteLine("            <Borders>")
+            .WriteLine("                <Border ss:Position=""Left"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("                <Border ss:Position=""Right"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("                <Border ss:Position=""Top"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("            </Borders>")
+            .WriteLine("            <Font ss:FontName=""Calibri"" ss:Size=""11"" ss:Bold=""1""/>") 'SET FONT
+            .WriteLine("        </Style>")
+            .WriteLine("        <Style ss:ID=""ksg"">")
+            .WriteLine("            <Alignment ss:Vertical=""Bottom""/>")
+            .WriteLine("            <Borders/>")
+            .WriteLine("            <Font ss:FontName=""Calibri""/>") 'SET FONT
+            .WriteLine("        </Style>")
+            .WriteLine("        <Style ss:ID=""isi"">")
+            .WriteLine("            <Borders>")
+            .WriteLine("                <Border ss:Position=""Bottom"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("                <Border ss:Position=""Left"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("                <Border ss:Position=""Right"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("                <Border ss:Position=""Top"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("            </Borders>")
+            .WriteLine("            <Font ss:FontName=""Calibri"" ss:Size=""10""/>") 'SET FONT
+            .WriteLine("        </Style>")
+            .WriteLine("    </Styles>")
 
             If exportar = 1 Then
                 If DGV.Name = "Hoja" Then
-                    .WriteLine(" <Worksheet ss:Name=""Hoja1"">") 'nombre de la hoja
-                    .WriteLine("  <Table ss:ExpandedColumnCount=""7"" ss:ExpandedRowCount=""2881"" x:FullColumns=""1""")
-                    .WriteLine("   x:FullRows=""1"" ss:DefaultColumnWidth=""60"" ss:DefaultRowHeight=""15""> ")
-                    .WriteLine("   <Column ss:Width=""39.75""/>")                            '   "Mes"
-                    .WriteLine("   <Column ss:Width=""93""/>  ")                             '   "Código de Empresa"
-                    .WriteLine("   <Column ss:Width=""84""/>  ")                             '   "Código de Suministro"
-                    .WriteLine("   <Column ss:Width=""99.75""/>")                            '  "Código de Barra de Compra"
-                    .WriteLine("   <Column ss:StyleID=""s62"" ss:Width=""84""/>  ")          '   "Fecha / Hora"
-                    .WriteLine("   <Column ss:StyleID=""s63"" ss:Width=""90""/>  ")          '   "EA"
+                    .WriteLine("    <Worksheet ss:Name=""Hoja1"">") 'SET NAMA SHEET
+                    .WriteLine("        <Table>")
+                    .WriteLine("            <Column ss:Width=""40""/>") '   "Mes"
+                    .WriteLine("            <Column ss:Width=""93""/>") '   "Código de Empresa"
+                    .WriteLine("            <Column ss:Width=""84""/>") '   "Código de Suministro"
+                    .WriteLine("            <Column ss:Width=""100""/>") '  "Código de Barra de Compra"
+                    .WriteLine("            <Column ss:Width=""84""/>") '   "Fecha / Hora"
+                    .WriteLine("            <Column ss:Width=""90""/>") '   "EA"
                 End If
-                'cabezera de la tabla
-                .WriteLine("   <Row ss:AutoFitHeight=""0"" ss:Height=""40.5"" ss:StyleID=""s64"">   ")
-                .WriteLine("		<Cell ss:StyleID=""s78""><Data ss:Type=""String"">Mes</Data></Cell> ")
-                .WriteLine("		<Cell ss:StyleID=""s78""><Data ss:Type=""String"">Código de Empresa</Data></Cell> ")
-                .WriteLine("		<Cell ss:StyleID=""s78""><Data ss:Type=""String"">Código de Suministro</Data></Cell>   ")
-                .WriteLine("		<Cell ss:StyleID=""s78""><Data ss:Type=""String"">Código de Barra de Compra</Data></Cell> ")
-                .WriteLine("		<Cell ss:StyleID=""s79""><Data ss:Type=""String"">Fecha / Hora</Data></Cell>")
-                .WriteLine("		<Cell ss:StyleID=""s80""><Data ss:Type=""String"">EA</Data></Cell>  ")
-                .WriteLine("   </Row> ")
+                'AUTO SET HEADER
+                .WriteLine("            <Row ss:StyleID=""ksg"">")
+                For i As Integer = 0 To DGV.Columns.Count - 1 'SET HEADER
+                    Application.DoEvents()
+                    .WriteLine("            <Cell ss:StyleID=""hdr"">")
+                    .WriteLine("                <Data ss:Type=""String"">{0}</Data>", DGV.Columns.Item(i).HeaderText)
+                    .WriteLine("            </Cell>")
+                Next
+                .WriteLine("            </Row>")
 
                 For intRow As Integer = 0 To DGV.RowCount - 1
                     Application.DoEvents()
-                    .WriteLine("   <Row ss:AutoFitHeight=""0"" ss:Height=""12.75"" ss:StyleID=""s64"" ss:utoFitHeight=""0"">  ")
-                    .WriteLine("		<Cell ss:StyleID=""s68""><Data ss:Type=""Number"">{0}</Data></Cell>", DGV.Item(0, intRow).Value.ToString)
-                    .WriteLine("		<Cell ss:StyleID=""s68""><Data ss:Type=""String"">{0}</Data></Cell>", DGV.Item(1, intRow).Value.ToString)
-                    .WriteLine("		<Cell ss:StyleID=""s68""><Data ss:Type=""Number"">{0}</Data></Cell>", DGV.Item(2, intRow).Value.ToString)
-                    .WriteLine("		<Cell ss:StyleID=""s68""><Data ss:Type=""String"">{0}</Data></Cell>", DGV.Item(3, intRow).Value.ToString)
-                    .WriteLine("		<Cell ss:StyleID=""s69""><Data ss:Type=""Number"">{0}</Data></Cell>", DGV.Item(4, intRow).Value.ToString)
-                    .WriteLine("		<Cell ss:StyleID=""s70""><Data ss:Type=""Number"">{0}</Data></Cell>", DGV.Item(5, intRow).Value.ToString)
-                    .WriteLine("   </Row> ")
-
+                    .WriteLine("        <Row ss:StyleID=""ksg"" ss:utoFitHeight =""0"">")
+                    For intCol As Integer = 0 To DGV.Columns.Count - 1
+                        Application.DoEvents()
+                        .WriteLine("        <Cell ss:StyleID=""isi"">")
+                        .WriteLine("            <Data ss:Type=""String"">{0}</Data>", DGV.Item(intCol, intRow).Value.ToString)
+                        .WriteLine("        </Cell>")
+                    Next
+                    .WriteLine("        </Row>")
                 Next
-                .WriteLine("  </Table>")
-                .WriteLine("  <WorksheetOptions xmlns=""urn:schemas-microsoft-com:office:excel"">   ")
-                .WriteLine("   <Unsynced/>  ")
-                .WriteLine("   <Print>")
-                .WriteLine("<ValidPrinterInfo/> ")
-                .WriteLine("<PaperSizeIndex>9</PaperSizeIndex>")
-                .WriteLine("<HorizontalResolution>300</HorizontalResolution>")
-                .WriteLine("<VerticalResolution>300</VerticalResolution> ")
-                .WriteLine("   </Print>")
-                .WriteLine("   <Selected/>  ")
-                .WriteLine("   <Panes>")
-                .WriteLine("<Pane>")
-                .WriteLine("<Number>3</Number> ")
-                .WriteLine("<RangeSelection>R1C1:R1C6</RangeSelection>  ")
-                .WriteLine("</Pane>")
-                .WriteLine("   </Panes>")
-                .WriteLine("   <ProtectObjects>False</ProtectObjects>   ")
-                .WriteLine("   <ProtectScenarios>False</ProtectScenarios>")
-                .WriteLine("  </WorksheetOptions>")
-                .WriteLine(" </Worksheet>   ")
+                .WriteLine("        </Table>")
+                .WriteLine("    </Worksheet>")
+
                 .WriteLine("</Workbook>")
             End If
             .Close()
@@ -266,25 +147,25 @@ Module MExportar
         Dim fs As New StreamWriter(FlNm, True)
         With fs
             If DGV.Name = "Hoja" Then
-                .WriteLine(" <Worksheet ss:Name=""" & NameSector & """>") 'nombre de la hoja
-                .WriteLine("  <Table ss:ExpandedColumnCount=""7"" ss:ExpandedRowCount=""2881"" x:FullColumns=""1""")
-                .WriteLine("   x:FullRows=""1"" ss:DefaultColumnWidth=""60"" ss:DefaultRowHeight=""15""> ")
-                .WriteLine("   <Column ss:Width=""39.75""/>")                            '   "Mes"
-                .WriteLine("   <Column ss:Width=""93""/>  ")                             '   "Código de Empresa"
-                .WriteLine("   <Column ss:Width=""84""/>  ")                             '   "Código de Suministro"
-                .WriteLine("   <Column ss:Width=""99.75""/>")                            '  "Código de Barra de Compra"
-                .WriteLine("   <Column ss:StyleID=""s62"" ss:Width=""84""/>  ")          '   "Fecha / Hora"
-                .WriteLine("   <Column ss:StyleID=""s63"" ss:Width=""90""/>  ")          '   "EA""EA"
+                .WriteLine("    <Worksheet ss:Name=""" & NameSector & """>") 'SET NAMA SHEET
+                .WriteLine("        <Table>")
+                .WriteLine("            <Column ss:Width=""40""/>") '   "Mes"
+                .WriteLine("            <Column ss:Width=""93""/>") '   "Código de Empresa"
+                .WriteLine("            <Column ss:Width=""84""/>") '   "Código de Suministro"
+                .WriteLine("            <Column ss:Width=""100""/>") '  "Código de Barra de Compra"
+                .WriteLine("            <Column ss:Width=""84""/>") '   "Fecha / Hora"
+                .WriteLine("            <Column ss:Width=""90""/>") '   "EA"
             End If
-            'cabezera de la tabla
-            .WriteLine("   <Row ss:AutoFitHeight=""0"" ss:Height=""40.5"" ss:StyleID=""s64"">   ")
-            .WriteLine("		<Cell ss:StyleID=""s78""><Data ss:Type=""String"">Mes</Data></Cell> ")
-            .WriteLine("		<Cell ss:StyleID=""s78""><Data ss:Type=""String"">Código de Empresa</Data></Cell> ")
-            .WriteLine("		<Cell ss:StyleID=""s78""><Data ss:Type=""String"">Código de Suministro</Data></Cell>   ")
-            .WriteLine("		<Cell ss:StyleID=""s78""><Data ss:Type=""String"">Código de Barra de Compra</Data></Cell> ")
-            .WriteLine("		<Cell ss:StyleID=""s79""><Data ss:Type=""String"">Fecha / Hora</Data></Cell>")
-            .WriteLine("		<Cell ss:StyleID=""s80""><Data ss:Type=""String"">EA</Data></Cell>  ")
-            .WriteLine("   </Row> ")
+            'AUTO SET HEADER
+            .WriteLine("            <Row ss:StyleID=""ksg"">")
+            For i As Integer = 0 To DGV.Columns.Count - 1 'SET HEADER
+                Application.DoEvents()
+                .WriteLine("            <Cell ss:StyleID=""hdr"">")
+                .WriteLine("                <Data ss:Type=""String"">{0}</Data>", DGV.Columns.Item(i).HeaderText)
+                .WriteLine("            </Cell>")
+            Next
+            .WriteLine("            </Row>")
+
         End With
         fs.Close()
     End Sub
@@ -293,15 +174,35 @@ Module MExportar
         With fs
             For intRow As Integer = 0 To DGV.RowCount - 1
                 Application.DoEvents()
-                .WriteLine("   <Row ss:AutoFitHeight=""0"" ss:Height=""12.75"" ss:StyleID=""s64"" ss:utoFitHeight=""0"">  ")
-                .WriteLine("		<Cell ss:StyleID=""s68""><Data ss:Type=""Number"">{0}</Data></Cell>", DGV.Item(0, intRow).Value.ToString)
-                .WriteLine("		<Cell ss:StyleID=""s68""><Data ss:Type=""String"">{0}</Data></Cell>", DGV.Item(1, intRow).Value.ToString)
-                .WriteLine("		<Cell ss:StyleID=""s68""><Data ss:Type=""Number"">{0}</Data></Cell>", DGV.Item(2, intRow).Value.ToString)
-                .WriteLine("		<Cell ss:StyleID=""s68""><Data ss:Type=""String"">{0}</Data></Cell>", DGV.Item(3, intRow).Value.ToString)
-                .WriteLine("		<Cell ss:StyleID=""s69""><Data ss:Type=""Number"">{0}</Data></Cell>", DGV.Item(4, intRow).Value.ToString)
-                .WriteLine("		<Cell ss:StyleID=""s70""><Data ss:Type=""Number"">{0}</Data></Cell>", DGV.Item(5, intRow).Value.ToString)
-                .WriteLine("   </Row> ")
+                .WriteLine("        <Row ss:StyleID=""ksg"" ss:utoFitHeight =""0"">")
 
+                .WriteLine("        <Cell ss:StyleID=""isi"">")
+                .WriteLine("            <Data ss:Type=""Number"">{0}</Data>", DGV.Item(0, intRow).Value.ToString)
+                .WriteLine("        </Cell>")
+                .WriteLine("        <Cell ss:StyleID=""isi"">")
+                .WriteLine("            <Data ss:Type=""String"">{0}</Data>", DGV.Item(1, intRow).Value.ToString)
+                .WriteLine("        </Cell>")
+                .WriteLine("        <Cell ss:StyleID=""isi"">")
+                .WriteLine("            <Data ss:Type=""Number"">{0}</Data>", DGV.Item(2, intRow).Value.ToString)
+                .WriteLine("        </Cell>")
+                .WriteLine("        <Cell ss:StyleID=""isi"">")
+                .WriteLine("            <Data ss:Type=""String"">{0}</Data>", DGV.Item(3, intRow).Value.ToString)
+                .WriteLine("        </Cell>")
+                .WriteLine("        <Cell ss:StyleID=""isi"">")
+                .WriteLine("            <Data ss:Type=""Number"">{0}</Data>", DGV.Item(4, intRow).Value.ToString)
+                .WriteLine("        </Cell>")
+                .WriteLine("        <Cell ss:StyleID=""isi"">")
+                .WriteLine("            <Data ss:Type=""Number"">{0}</Data>", DGV.Item(5, intRow).Value.ToString)
+                .WriteLine("        </Cell>")
+
+                .WriteLine("        </Row>")
+                'For intCol As Integer = 0 To DGV.Columns.Count - 1
+                '    Application.DoEvents()
+                '    .WriteLine("        <Cell ss:StyleID=""isi"">")
+                '    .WriteLine("            <Data ss:Type=""String"">{0}</Data>", DGV.Item(intCol, intRow).Value.ToString)
+                '    .WriteLine("        </Cell>")
+                'Next
+                '.WriteLine("        </Row>")
             Next
             .Close()
         End With
