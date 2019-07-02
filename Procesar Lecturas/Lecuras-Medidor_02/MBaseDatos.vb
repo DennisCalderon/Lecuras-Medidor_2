@@ -118,4 +118,32 @@ Module MBaseDatos
             'End If
         End Try
     End Sub
+    Public Sub ConsultaSector(ByVal serie As String, ByRef NombreSector As String)
+
+        Dim objCon As SQLiteConnection
+        Dim objCommand As SQLiteCommand
+        Dim objReader As SQLiteDataReader
+
+        Try
+            objCon = New SQLiteConnection(cadena_conexion)
+            objCon.Open()
+            objCommand = objCon.CreateCommand()
+            'MsgBox("primero", MsgBoxStyle.Information, "leyendo")
+            objCommand.CommandText = "select NombreSector from Padroncliente where serie=""" & serie & """ "
+            'MsgBox(objCommand.CommandText, MsgBoxStyle.Information, "leyendo")
+            objReader = objCommand.ExecuteReader()
+
+            'MsgBox((objReader.Read()), MsgBoxStyle.Information, "leyendo")
+            If objReader.Read() Then
+                NombreSector = objReader.Item("NombreSector").ToString
+                'MsgBox(CStr(FTEA), MsgBoxStyle.Information, "leyendo")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        Finally
+            objCommand.Dispose()
+            objReader.Close()
+            objCon.Close()
+        End Try
+    End Sub
 End Module
