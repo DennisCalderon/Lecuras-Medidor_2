@@ -61,6 +61,7 @@ Partial Class Principal
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.ActualizarMedidoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AyudaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         CType(Me.dgvcontenido, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -381,6 +382,10 @@ Partial Class Principal
         Me.AyudaToolStripMenuItem.Size = New System.Drawing.Size(53, 20)
         Me.AyudaToolStripMenuItem.Text = "Ayuda"
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
         'Principal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -447,4 +452,5 @@ Partial Class Principal
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents ActualizarMedidoresToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AyudaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenFileDialog1 As OpenFileDialog
 End Class

@@ -88,4 +88,34 @@ Module MBaseDatos
             End With
         End Using
     End Sub
+    Public Sub ConsultaCodSumFT(ByVal serie As String, ByRef codsuministro As String, ByRef FTEA As String)
+
+        Dim objCon As SQLiteConnection
+        Dim objCommand As SQLiteCommand
+        Dim objReader As SQLiteDataReader
+
+        Try
+            objCon = New SQLiteConnection(cadena_conexion)
+            objCon.Open()
+            objCommand = objCon.CreateCommand()
+            'objCommand.CommandText = "select CodigoSuministro, FactorTransformacionEA from Clientes where serie=" & serie & " and NumImport in (select  Max(NumImport) from Clientes)"
+            objCommand.CommandText = "select CodigoSuministro, FactorTransformacionEA from Padroncliente where serie=""" & serie & """ "
+            objReader = objCommand.ExecuteReader()
+
+            'MsgBox((objReader.Read()), MsgBoxStyle.Information, "leyendo")
+            If objReader.Read() Then
+                codsuministro = objReader.Item("CodigoSuministro").ToString
+                FTEA = objReader.Item("FactorTransformacionEA").ToString
+                'MsgBox(CStr(FTEA), MsgBoxStyle.Information, "leyendo")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        Finally
+            'If Not IsNothing(objCon) Then
+            objCommand.Dispose()
+            objReader.Close()
+            objCon.Close()
+            'End If
+        End Try
+    End Sub
 End Module
