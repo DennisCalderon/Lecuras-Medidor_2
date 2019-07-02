@@ -559,14 +559,6 @@ Public Class Principal
 
                         MExportar.AddExcelBody(DGVTotal, FlNm) 'agregar el contenido al cuerpo del excel
 
-                        'If (MVariables.GuardarDB = "1") Then
-                        '    'guardar los registros en la base de datos
-                        '    MVariables.RegDB = DGVTotal
-                        '    MVariables.NombreSector = "Tacna"
-                        '    Dim formDB As New GuardarDGVDB
-                        '    formDB.ShowDialog()
-                        'End If
-
                         DGVTotal.Rows.Clear()
 
                         contadorReg = contadorReg + 1
@@ -618,14 +610,6 @@ Public Class Principal
                         MExportar.IntegridadLecturas(arregloMoquegua(intRow), DGVTotal, "Moquegua", Report)
 
                         MExportar.AddExcelBody(DGVTotal, FlNm) 'agregar el contenido al cuerpo del excel
-
-                        'If (MVariables.GuardarDB = "1") Then
-                        '    'guardar los registros en la base de datos
-                        '    MVariables.RegDB = DGVTotal
-                        '    MVariables.NombreSector = "Moquegua"
-                        '    Dim formDB As New GuardarDGVDB
-                        '    formDB.ShowDialog()
-                        'End If
 
                         DGVTotal.Rows.Clear()
 
@@ -680,14 +664,6 @@ Public Class Principal
 
                         MExportar.AddExcelBody(DGVTotal, FlNm) 'agregar el contenido al cuerpo del excel
 
-                        'If (MVariables.GuardarDB = "1") Then
-                        '    'guardar los registros en la base de datos
-                        '    MVariables.RegDB = DGVTotal
-                        '    MVariables.NombreSector = "Ilo"
-                        '    Dim formDB As New GuardarDGVDB
-                        '    formDB.ShowDialog()
-                        'End If
-
                         DGVTotal.Rows.Clear()
 
                         contadorReg = contadorReg + 1
@@ -738,14 +714,6 @@ Public Class Principal
 
                         MExportar.AddExcelBody(DGVTotal, FlNm) 'agregar el contenido al cuerpo del excel
 
-                        'If (MVariables.GuardarDB = "1") Then
-                        '    'guardar los registros en la base de datos
-                        '    MVariables.RegDB = DGVTotal
-                        '    MVariables.NombreSector = "Libres"
-                        '    Dim formDB As New GuardarDGVDB
-                        '    formDB.ShowDialog()
-                        'End If
-
                         DGVTotal.Rows.Clear()
 
                         contadorReg = contadorReg + 1
@@ -792,5 +760,22 @@ Public Class Principal
                 btnNuevo.Select()
             End If
         End If
+    End Sub
+
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
+        btnBuscar.Enabled = True
+        checkedMedidor(True)
+        lblregistros.Text = "0"
+        lblarchivos.Text = "0"
+        btnNuevo.Enabled = False
+        btnExportUnit.Enabled = False
+        btnExportMasivo.Enabled = False
+        lbArchivos.Enabled = False
+        checkedPadron(False)
+
+        lbArchivos.Items.Clear()
+        dgvcontenido.Rows.Clear()
+
+        btnBuscar.Select()
     End Sub
 End Class

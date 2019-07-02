@@ -56,7 +56,7 @@ Module MBaseDatos
         Else
             sql = "SELECT * FROM Padroncliente WHERE NumImport in (select  Max(NumImport) from Padroncliente where NombrePadron=""" & NombrePadron & """)"
         End If
-        MsgBox(sql)
+        'MsgBox(sql)
         Using con As New SQLiteConnection(cadena_conexion)
 
             Dim command As New SQLiteCommand(sql, con)
