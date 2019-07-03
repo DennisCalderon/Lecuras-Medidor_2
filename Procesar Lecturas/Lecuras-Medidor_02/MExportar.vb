@@ -134,7 +134,7 @@ Module MExportar
 
             If DGV.Name = "Hoja" Then
                 .WriteLine(" <Worksheet ss:Name=""Hoja1"">") ' nombre de la hoja
-                .WriteLine("  <Table ss:ExpandedColumnCount=""7"" ss:ExpandedRowCount=""2881"" x:FullColumns=""1""")
+                .WriteLine("  <Table ss:ExpandedColumnCount=""7"" x:FullColumns=""1""") 'ss:ExpandedRowCount=""2881""
                 .WriteLine("   x:FullRows=""1"" ss:DefaultColumnWidth=""60"" ss:DefaultRowHeight=""15""> ")
                 .WriteLine("   <Column ss:Width=""39.75""/>")                       '   "Mes"
                 .WriteLine("   <Column ss:Width=""93""/>  ")                        '   "Código de Empresa"

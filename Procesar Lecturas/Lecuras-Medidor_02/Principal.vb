@@ -95,7 +95,7 @@ Public Class Principal
             lblarchivos.Text = cant_archivos
 
             btnBuscar.Enabled = False
-            btnExportMasivo.Enabled = True
+            'btnExportMasivo.Enabled = True
             lbArchivos.Enabled = True
             btnNuevo.Enabled = True
             checkedMedidor(False)
@@ -109,7 +109,7 @@ Public Class Principal
     Private Sub lbArchivos_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lbArchivos.SelectedIndexChanged
         btnNuevo.Enabled = False
         btnExportUnit.Enabled = False
-        btnExportMasivo.Enabled = False
+        'btnExportMasivo.Enabled = False
         dgvcontenido.Enabled = False
 
         dgvcontenido.Rows.Clear()
@@ -138,7 +138,7 @@ Public Class Principal
         eliminarPrimeralineaDGV(dgvcontenido)
         btnNuevo.Enabled = True
         btnExportUnit.Enabled = True
-        btnExportMasivo.Enabled = True
+        'btnExportMasivo.Enabled = True
         lbArchivos.Enabled = True
         dgvcontenido.Enabled = True
     End Sub
@@ -397,7 +397,7 @@ Public Class Principal
         Process.Start(FlNm)
         btnNuevo.Enabled = True
         btnExportUnit.Enabled = True
-        btnExportMasivo.Enabled = True
+        'btnExportMasivo.Enabled = True
         lblarchivos.Enabled = True
         dgvcontenido.Enabled = True
     End Sub
@@ -426,7 +426,7 @@ Public Class Principal
             MsgBox("Ingreso de nombre no válido", MsgBoxStyle.Information, "Atención!!!")
             lbArchivos.Enabled = True
             btnNuevo.Enabled = True
-            btnExportMasivo.Enabled = True
+            'btnExportMasivo.Enabled = True
             dgvcontenido.Enabled = True
             exportar = 1
             ProgressBar1.Value = 0
@@ -732,10 +732,40 @@ Public Class Principal
         btnExportMasivo.Enabled = False
         lbArchivos.Enabled = False
         checkedPadron(False)
+        chkTacna.Checked = False
+        chkMoquegua.Checked = False
+        chkIlo.Checked = False
+        chkLibres.Checked = False
+        chkA1800.Checked = False
+        chkMHTAB.Checked = False
+        chkS1440.Checked = False
 
         lbArchivos.Items.Clear()
         dgvcontenido.Rows.Clear()
 
         btnBuscar.Select()
+    End Sub
+
+    Private Sub chkTacna_CheckedChanged(sender As Object, e As EventArgs) Handles chkTacna.CheckedChanged
+        verificarExportMasiva()
+    End Sub
+
+    Private Sub chkMoquegua_CheckedChanged(sender As Object, e As EventArgs) Handles chkMoquegua.CheckedChanged
+        verificarExportMasiva()
+    End Sub
+
+    Private Sub chkIlo_CheckedChanged(sender As Object, e As EventArgs) Handles chkIlo.CheckedChanged
+        verificarExportMasiva()
+    End Sub
+
+    Private Sub chkLibres_CheckedChanged(sender As Object, e As EventArgs) Handles chkLibres.CheckedChanged
+        verificarExportMasiva()
+    End Sub
+    Sub verificarExportMasiva()
+        If (chkTacna.Checked = True Or chkMoquegua.Checked = True Or chkIlo.Checked = True Or chkLibres.Checked = True) Then
+            btnExportMasivo.Enabled = True
+        Else
+            btnExportMasivo.Enabled = False
+        End If
     End Sub
 End Class
