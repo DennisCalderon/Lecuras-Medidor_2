@@ -447,4 +447,90 @@ Module MExportar
             .Close()
         End With
     End Sub
+    Public Sub ExportPadron(ByVal lista As List(Of String), ByVal dgvpadron As DataGridView)
+        Dim FilePadron As String = "Exportados\" & "Padron" & "--" & Now.Year & "-" & Now.Month & "-" & Now.Day & "--" & Now.Hour & "-" & Now.Minute & "-" & Now.Second & ".xls"
+        If File.Exists(FilePadron) Then File.Delete(FilePadron)
+
+        MBaseDatos.ExportPadron(lista, dgvpadron)
+
+        Dim fw As New StreamWriter(FilePadron, False)
+        With fw
+            .WriteLine("<?xml version=""1.0""?>")
+            .WriteLine("<?mso-application progid=""Excel.Sheet""?>")
+            .WriteLine("<Workbook xmlns=""urn:schemas-microsoft-com:office:spreadsheet"">")
+            .WriteLine("    <Styles>")
+            .WriteLine("        <Style ss:ID=""hdr"">")
+            .WriteLine("            <Alignment ss:Horizontal=""Center""/>")
+            .WriteLine("            <Borders>")
+            .WriteLine("                <Border ss:Position=""Left"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("                <Border ss:Position=""Right"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("                <Border ss:Position=""Top"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("            </Borders>")
+            .WriteLine("            <Font ss:FontName=""Calibri"" ss:Size=""11"" ss:Bold=""1""/>") 'SET FONT
+            .WriteLine("        </Style>")
+            .WriteLine("        <Style ss:ID=""ksg"">")
+            .WriteLine("            <Alignment ss:Vertical=""Bottom""/>")
+            .WriteLine("            <Borders/>")
+            .WriteLine("            <Font ss:FontName=""Calibri""/>") 'SET FONT
+            .WriteLine("        </Style>")
+            .WriteLine("        <Style ss:ID=""isi"">")
+            .WriteLine("            <Borders>")
+            .WriteLine("                <Border ss:Position=""Bottom"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("                <Border ss:Position=""Left"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("                <Border ss:Position=""Right"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("                <Border ss:Position=""Top"" ss:LineStyle=""Continuous"" ss:Weight=""1""/>")
+            .WriteLine("            </Borders>")
+            .WriteLine("            <Font ss:FontName=""Calibri"" ss:Size=""10""/>") 'SET FONT
+            .WriteLine("        </Style>")
+            .WriteLine("    </Styles>")
+
+            .WriteLine("    <Worksheet ss:Name=""Hoja1"">") 'SET NAMA SHEET
+                .WriteLine("        <Table>")
+                .WriteLine("            <Column ss:Width=""100""/>") '"Número de Padrón Actual"
+                .WriteLine("            <Column ss:Width=""100""/>") '"NombrePadron"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Item"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Codigo Ruta de Suministro"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Codigo de Suministro"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Nombre de Suministro"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Direccion del Predio"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Nombre del Sector"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Tension"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Tarifa"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Sistema Electrico"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Actividad Economica"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Factor de Tension"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Factor de Corriente"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Factor de Transformacion EA"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Marca del Medidor"
+                .WriteLine("            <Column ss:Width=""100""/>") '"Modelo"
+            .WriteLine("            <Column ss:Width=""100""/>") '"Serie"
+            'AUTO SET HEADER
+            .WriteLine("            <Row ss:StyleID=""ksg"">")
+
+            For i As Integer = 0 To dgvpadron.Columns.Count - 1 'SET HEADER
+                Application.DoEvents()
+                .WriteLine("            <Cell ss:StyleID=""hdr"">")
+                .WriteLine("                <Data ss:Type=""String"">{0}</Data>", dgvpadron.Columns.Item(i).HeaderText)
+                .WriteLine("            </Cell>")
+            Next
+            .WriteLine("            </Row>")
+
+            For intRow As Integer = 0 To dgvpadron.RowCount - 2
+                Application.DoEvents()
+                .WriteLine("        <Row ss:StyleID=""ksg"" ss:utoFitHeight =""0"">")
+                For intCol As Integer = 0 To dgvpadron.Columns.Count - 1
+                    Application.DoEvents()
+                    .WriteLine("        <Cell ss:StyleID=""isi"">")
+                    .WriteLine("            <Data ss:Type=""String"">{0}</Data>", dgvpadron.Item(intCol, intRow).Value.ToString)
+                    .WriteLine("        </Cell>")
+                Next
+                .WriteLine("        </Row>")
+            Next
+            .WriteLine("        </Table>")
+            .WriteLine("    </Worksheet>")
+            .WriteLine("</Workbook>")
+            .Close()
+        End With
+        Process.Start(FilePadron)
+    End Sub
 End Module

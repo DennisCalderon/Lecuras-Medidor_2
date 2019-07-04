@@ -68,8 +68,8 @@ Module MBaseDatos
 
             With dgvmedidor
                 .Columns(0).HeaderText = "Número de Padrón Actual"
-                .Columns(2).HeaderText = "Nombre de Padrón"
-                .Columns(3).HeaderText = "Item"
+                .Columns(1).HeaderText = "Nombre de Padrón"
+                .Columns(2).HeaderText = "Item"
                 .Columns(3).HeaderText = "Codigo Ruta de Suministro"
                 .Columns(4).HeaderText = "Codigo de Suministro"
                 .Columns(5).HeaderText = "Nombre de Suministro"
@@ -145,5 +145,24 @@ Module MBaseDatos
             objReader.Close()
             objCon.Close()
         End Try
+    End Sub
+    Public Sub ExportPadron(ByVal list As List(Of String), ByRef dgvPadron As DataGridView)
+        Dim sql As String = ""
+        For intlist As Integer = 0 To list.Count - 1
+            sql = sql & " SELECT * FROM Padroncliente where NumImport in (select  Max(NumImport) from Padroncliente WHERE NombrePadron=""" & list.Item(intlist) & """) UNION"
+            If intlist = list.Count - 1 Then
+                sql = sql.Remove(sql.Length - 5)
+                sql = sql & " ORDER BY NombreSector"
+            End If
+        Next
+
+        Using con As New SQLiteConnection(cadena_conexion)
+            Dim command As New SQLiteCommand(sql, con)
+            Dim da As New SQLiteDataAdapter
+            da.SelectCommand = command
+            Dim dt As New DataTable
+            da.Fill(dt)
+            dgvPadron.DataSource = dt
+        End Using
     End Sub
 End Module

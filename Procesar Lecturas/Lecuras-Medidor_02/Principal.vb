@@ -259,9 +259,32 @@ Public Class Principal
                 'MsgBox(arreglo(15))
                 'MsgBox(arreglo(16))
                 fech = CStr(arreglo(13).Substring(1, 8))
+                'MsgBox(fech)
                 fech_hora = CStr(fech.Year) & (If(fech.Month < 10, 0 & fech.Month, fech.Month)) & CStr(If(fech.Day < 10, 0 & fech.Day, fech.Day)) &
                             (Replace(arreglo(14).Substring(1, 5), ":", ""))
+
+                Dim cant_dias As Integer = System.DateTime.DaysInMonth(fech.Year, fech.Month) 'Obtiene la cantidad de días indicandole el Año y el Mes
+
+                If fech_hora.Substring(8, 4) = "2400" Then
+                    '201905012045
+                    Dim dia As String
+                    fech_hora = fech_hora.Remove(8, 4)
+                    dia = fech_hora.Substring(6, 2)
+                    fech_hora = fech_hora.Remove(6, 2)
+                    dia = Val(dia + 1)
+                    If dia.Length = 1 Then
+                        dia = "0" + dia
+                    End If
+
+                    fech_hora = fech_hora + dia + "0000"
+                    If dia > cant_dias Then
+                        fech_hora = CStr(fech.Year) + IIf(((Val(fech.Month) + 1).ToString).Length = 1, "0" + (Val(fech.Month) + 1).ToString, (Val(fech.Month) + 1)) + dia - cant_dias
+                        fech_hora = fech_hora + "0000"
+                    End If
+                End If
+
                 mes = fech.Month
+                'MsgBox(fech_hora)
                 Potencia = arreglo(16)
                 Potencia = Potencia.Replace(";", "")
                 'MsgBox(CDbl(Potencia))
@@ -527,7 +550,7 @@ Public Class Principal
 
                 'Aqui comienza el procesamiento de los datos
                 Dim contadorReg As Integer = 1
-                Dim newHojaExcel As Integer = 22 'division de hojas en la exportacion al archivo de excel
+                Dim newHojaExcel As Integer = 240 'division de hojas en la exportacion al archivo de excel
                 Dim divReg As Integer = 1
                 Dim id_medidor As String
 
@@ -550,7 +573,7 @@ Public Class Principal
                         'MsgBox(tipo_medidor)
                         Select Case tipo_medidor
                             Case "LP" : lecturaArchivo(DGVTotal, ruta, " ", 2, id_medidor)
-                            Case "pr" : lecturaArchivo(DGVTotal, ruta, ",", 1, id_medidor)
+                            Case "pr" : lecturaArchivo(DGVTotal, ruta, " ", 1, id_medidor)
                             Case "ta" : lecturaArchivo(DGVTotal, ruta, vbTab, 1, id_medidor)
                         End Select
                         eliminarPrimeralineaDGV(DGVTotal)
@@ -591,7 +614,7 @@ Public Class Principal
                         'MsgBox(tipo_medidor)
                         Select Case tipo_medidor
                             Case "LP" : lecturaArchivo(DGVTotal, ruta, " ", 2, id_medidor)
-                            Case "pr" : lecturaArchivo(DGVTotal, ruta, ",", 1, id_medidor)
+                            Case "pr" : lecturaArchivo(DGVTotal, ruta, " ", 1, id_medidor)
                             Case "ta" : lecturaArchivo(DGVTotal, ruta, vbTab, 1, id_medidor)
                         End Select
 
@@ -634,7 +657,7 @@ Public Class Principal
                         'MsgBox(tipo_medidor)
                         Select Case tipo_medidor
                             Case "LP" : lecturaArchivo(DGVTotal, ruta, " ", 2, id_medidor)
-                            Case "pr" : lecturaArchivo(DGVTotal, ruta, ",", 1, id_medidor)
+                            Case "pr" : lecturaArchivo(DGVTotal, ruta, " ", 1, id_medidor)
                             Case "ta" : lecturaArchivo(DGVTotal, ruta, vbTab, 1, id_medidor)
                         End Select
 
@@ -675,7 +698,7 @@ Public Class Principal
                         'MsgBox(tipo_medidor)
                         Select Case tipo_medidor
                             Case "LP" : lecturaArchivo(DGVTotal, ruta, " ", 2, id_medidor)
-                            Case "pr" : lecturaArchivo(DGVTotal, ruta, ",", 1, id_medidor)
+                            Case "pr" : lecturaArchivo(DGVTotal, ruta, " ", 1, id_medidor)
                             Case "ta" : lecturaArchivo(DGVTotal, ruta, vbTab, 1, id_medidor)
                         End Select
                         eliminarPrimeralineaDGV(DGVTotal)

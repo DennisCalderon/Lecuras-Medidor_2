@@ -29,6 +29,8 @@ Partial Class Padron_Cliente_Exportar
         Me.chkMoquegua = New System.Windows.Forms.CheckBox()
         Me.chkTacna = New System.Windows.Forms.CheckBox()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.dgvpadron = New System.Windows.Forms.DataGridView()
+        CType(Me.dgvpadron, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnCancela
@@ -82,7 +84,7 @@ Partial Class Padron_Cliente_Exportar
         'chkTacna
         '
         Me.chkTacna.AutoSize = True
-        Me.chkTacna.Location = New System.Drawing.Point(44, 34)
+        Me.chkTacna.Location = New System.Drawing.Point(43, 34)
         Me.chkTacna.Name = "chkTacna"
         Me.chkTacna.Size = New System.Drawing.Size(57, 17)
         Me.chkTacna.TabIndex = 27
@@ -98,12 +100,21 @@ Partial Class Padron_Cliente_Exportar
         Me.Label2.TabIndex = 26
         Me.Label2.Text = "Elija los Padrones :"
         '
+        'dgvpadron
+        '
+        Me.dgvpadron.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvpadron.Location = New System.Drawing.Point(23, 140)
+        Me.dgvpadron.Name = "dgvpadron"
+        Me.dgvpadron.Size = New System.Drawing.Size(691, 93)
+        Me.dgvpadron.TabIndex = 33
+        '
         'Padron_Cliente_Exportar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(213, 108)
+        Me.ClientSize = New System.Drawing.Size(234, 115)
         Me.ControlBox = False
+        Me.Controls.Add(Me.dgvpadron)
         Me.Controls.Add(Me.btnCancela)
         Me.Controls.Add(Me.btnExportar)
         Me.Controls.Add(Me.chkLibres)
@@ -115,6 +126,7 @@ Partial Class Padron_Cliente_Exportar
         Me.Name = "Padron_Cliente_Exportar"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Exportar Padrón de Clientes"
+        CType(Me.dgvpadron, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -127,4 +139,5 @@ Partial Class Padron_Cliente_Exportar
     Friend WithEvents chkMoquegua As CheckBox
     Friend WithEvents chkTacna As CheckBox
     Friend WithEvents Label2 As Label
+    Friend WithEvents dgvpadron As DataGridView
 End Class

@@ -46,7 +46,7 @@ Public Class Padron_Clientes
                 End Try
             End If
         End Using
-
+        btnExportar.Enabled = False
     End Sub
 
     Private Sub cboExcel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboExcel.SelectedIndexChanged
@@ -121,5 +121,11 @@ Public Class Padron_Clientes
 
         MBaseDatos.MostrarPadron(NombreSector.ToUpper(), dgvmedidor)
         dgvmedidor.AllowUserToAddRows = False ' denegar la acción de registros al usuario
+        btnExportar.Enabled = True
+    End Sub
+
+    Private Sub btnExportar_Click(sender As Object, e As EventArgs) Handles btnExportar.Click
+        Dim form As New Padron_Cliente_Exportar
+        form.ShowDialog()
     End Sub
 End Class
